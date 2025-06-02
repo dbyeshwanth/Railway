@@ -1,5 +1,4 @@
 streamlit
-pyttsx3
 SQLAlchemy
 pydantic
 mysql-connector-python

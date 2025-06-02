@@ -35,7 +35,7 @@ def speak_text(text):
                 print(f"⚠️ TTS RuntimeError ignored: {e}")
     threading.Thread(target=run_speech, daemon=True).start()
 
-# Auto index on app start
+# Auto index on app start if needed (only once)
 if not st.session_state.indexed:
     if not os.path.exists("./vector_index"):
         with st.spinner("📥 Indexing documents from SharePoint for first use..."):
@@ -48,7 +48,7 @@ if not st.session_state.indexed:
     else:
         st.session_state.indexed = True
 
-# SharePoint connection test
+# Test SharePoint connection button
 if st.button("🧪 Test SharePoint Connection"):
     st.info("Testing connection to SharePoint and fetching .txt files...")
     try:
@@ -74,16 +74,9 @@ with chat_container:
 # Input field
 input_container = st.container()
 with input_container:
-    input_col, mic_col = st.columns([0.9, 0.1])
-    question = None
-    with input_col:
-        question = st.chat_input("Ask me anything...")
+    question = st.chat_input("Ask me anything...")
 
-    with mic_col:
-        if st.button("🎤", help="Voice input disabled (PyAudio not installed)", type="primary"):
-            st.warning("🎤 Voice input is currently disabled because PyAudio is not installed.")
-
-# Chat logic
+# Process the question
 if question:
     if st.session_state.messages and st.session_state.messages[-1]["role"] == "user" and st.session_state.messages[-1]["content"] == question:
         pass

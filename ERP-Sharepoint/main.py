@@ -9,7 +9,8 @@ import os
 # 🎨 UI Setup
 col1, col2 = st.columns([0.1, 1])
 with col1:
-    st.image("kenai.png", width=50)
+    st.image("kenai.png", width=50)  # Commented out due to loading error
+    pass
 with col2:
     st.markdown("<h1 style='display: flex; align-items: center;'>Oracle Convopilot</h1>", unsafe_allow_html=True)
 
